@@ -33,7 +33,7 @@ public class Serve : MonoBehaviour
             _slider.value = _elapsedHold;
             _fillBar.color = _gradient.Evaluate(_elapsedHold/5);
         }
-        if (Input.GetKeyUp(_serveButton) && _spriteRenderer.flipX || _elapsedHold >= 6)
+        if (Input.GetKeyUp(_serveButton) && _spriteRenderer.flipX == false || _elapsedHold >= 6)
         {
             _currentBall.transform.parent = null;
             _currentBall.bodyType = RigidbodyType2D.Dynamic;
