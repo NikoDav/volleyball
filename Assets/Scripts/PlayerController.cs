@@ -60,6 +60,7 @@ public class PlayerController : MonoBehaviour
     public bool TeamRight => _teamRight;
 
     public GameManager GameManager { get => _gameManager; private set => _gameManager = value; }
+    public SuperHit SuperHit { get => _superHit; set => _superHit = value; }
 
     private void Update()
     {
@@ -92,9 +93,9 @@ public class PlayerController : MonoBehaviour
     {
         testVar = Physics2D.OverlapCircle(_checkPoint.position, _radius, _ballMask);
 
-        if (Physics2D.OverlapCircle(_checkPoint.position, _radius, _ballMask) && Input.GetKeyDown(KeyCode.M))
+        if (Physics2D.OverlapCircle(_checkPoint.position, _radius, _ballMask) && Input.GetKeyDown(KeyCode.M) && _controlled)
         {
-            _superHit.SetBall();
+            SuperHit.SetBall();
         }
     }
 

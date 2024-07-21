@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
             item.Serve.Initialized(_currentBall.GetComponent<Rigidbody2D>(), _startRight, KeyCode.LeftArrow, false);
             item.ButtonInnit(KeyCode.UpArrow, KeyCode.DownArrow, KeyCode.RightArrow, KeyCode.LeftArrow);
             item.Setting.ButtonSet(KeyCode.RightArrow, KeyCode.LeftArrow);
-
+            item.SuperHit.Innit(_startLeft);
         }
 
         foreach (var item in _leftTeam)
@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour
             item.Serve.Initialized(_currentBall.GetComponent<Rigidbody2D>(), _startLeft, KeyCode.D, true);
             item.ButtonInnit(KeyCode.W, KeyCode.S, KeyCode.D, KeyCode.A);
             item.Setting.ButtonSet(KeyCode.D, KeyCode.A);
+            item.SuperHit.Innit(_startRight);
         }
             
         if(Random.Range(0, 1) == 0)
