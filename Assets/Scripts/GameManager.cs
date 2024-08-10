@@ -136,6 +136,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public bool GetSide()
+    {
+        return _rightSide;
+    }
+
     private void SetupSide(List<PlayerController> controllers)
     {
         foreach (var item in controllers)
@@ -180,5 +185,15 @@ public class GameManager : MonoBehaviour
             _rightTeam[0].ChangeControl(true);
             _rightTeam[1].ChangeControl(false);
         }
+    }
+
+    
+    public void CheckHitFloor()
+    {
+        
+    }
+    public void Win()
+    {
+
     }
 }

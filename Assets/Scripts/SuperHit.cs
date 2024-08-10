@@ -17,7 +17,7 @@ public class SuperHit : MonoBehaviour
     {
         Vector2 direction = _target.position - transform.position;
         _player.GameManager.CurrentBall.transform.parent = null;
-        _player.GameManager.CurrentBall.GetComponent<Rigidbody2D>().AddForce(direction.normalized*20, ForceMode2D.Impulse) ;
+        _player.GameManager.CurrentBall.GetComponent<Rigidbody2D>().AddForce(direction.normalized*60, ForceMode2D.Impulse) ;
     }
 
     private IEnumerator Throw()
