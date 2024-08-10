@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -15,9 +16,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Transform _startLeft;
     [SerializeField] private GameObject _net;
     [SerializeField] private TouchPanel _touchPanel;
+    [SerializeField] private GameObject _winPanel;
+    [SerializeField] private TMP_Text _winText;
     private int _teamTouchRight;
     private int _teamTouchLeft;
     private bool _rightSide;
+    private int _rightPoints;
+    private int _leftPoints;
 
     public bool RightSide => _rightSide;
 
@@ -97,6 +102,7 @@ public class GameManager : MonoBehaviour
         if(TeamTouchRight > 3)
         {
             Time.timeScale = 0;
+            AddPoints(false);
         }
         if(TeamTouchRight >= 1)
         {
@@ -108,6 +114,7 @@ public class GameManager : MonoBehaviour
         if(TeamTouchLeft > 3)
         {
             Time.timeScale = 0;
+            AddPoints(true);
         }
         if (TeamTouchLeft >= 1)
         {
@@ -186,14 +193,28 @@ public class GameManager : MonoBehaviour
             _rightTeam[1].ChangeControl(false);
         }
     }
-
-    
-    public void CheckHitFloor()
+    public void AddPoints(bool right)
     {
-        
+        if (right)
+        {
+            _rightPoints++;
+        }
+        else
+        {
+            _leftPoints++;
+        }
     }
     public void Win()
     {
-
+        if(_rightPoints >= 5)
+        {
+            _winPanel.SetActive(true);
+            _winText.text = "Right side wins!";
+        }
+        if(_leftPoints >= 5)
+        {
+            _winPanel.SetActive(true);
+            _winText.text = "Left side wins!";
+        }
     }
 }

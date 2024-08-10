@@ -20,5 +20,17 @@ public class Ball : MonoBehaviour
         {
             _gameManager.SetSide(false);
         }
+
+        if(collision.TryGetComponent(out Floor floor))
+        {
+            if (_gameManager.GetSide())
+            {
+                _gameManager.AddPoints(false);
+            }
+            else
+            {
+                _gameManager.AddPoints(true);
+            }
+        }
     }
 }
