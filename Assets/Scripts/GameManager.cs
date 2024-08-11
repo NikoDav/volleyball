@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private PlayerController _player;
+    [SerializeField] private PlayerController _playerLeft;
+    [SerializeField] private PlayerController _playerRight;
     [SerializeField] private Ball _ball;
     private Ball _currentBall;
     [SerializeField] private List<PlayerController> _rightTeam = new List<PlayerController>();    
@@ -40,8 +41,8 @@ public class GameManager : MonoBehaviour
 
         for (int  i = 0; i < 2; i++)
         {
-            var leftPlayer = Instantiate(_player, _leftTeamSpawns[i].position, Quaternion.identity);
-            var rightPlayer = Instantiate(_player, _rightTeamSpawns[i].position, Quaternion.identity);
+            var leftPlayer = Instantiate(_playerLeft, _leftTeamSpawns[i].position, Quaternion.identity);
+            var rightPlayer = Instantiate(_playerRight, _rightTeamSpawns[i].position, Quaternion.identity);
             _leftTeam.Add(leftPlayer);
             _rightTeam.Add(rightPlayer);
         }

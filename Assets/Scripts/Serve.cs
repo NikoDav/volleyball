@@ -8,14 +8,21 @@ public class Serve : MonoBehaviour
     [SerializeField] private SpriteRenderer _spriteRenderer;
     private Transform _startPoint;
     [SerializeField] private PlayerController _player;
-    [SerializeField] private Slider _slider;
-    [SerializeField] private Image _fillBar;
-    [SerializeField] private Gradient _gradient;
     private Rigidbody2D _currentBall;
     private float _elapsedHold;
     private KeyCode _serveButton;
+    private ServeBar _serveBar;
 
-    private void Update()
+    private void Start()
+    {
+        if (_player.TeamRight)
+            _serveBar = FindObjectOfType<RightServeBar>();
+        else
+            _serveBar = FindObjectOfType<LeftServeBar>();
+
+     }
+
+   private void Update()
     {
         Service();
     }
@@ -28,14 +35,18 @@ public class Serve : MonoBehaviour
         if (Input.GetKey(_serveButton))
         {
             _elapsedHold += 3f * Time.deltaTime;
-            _slider.value = _elapsedHold;
-            _fillBar.color = _gradient.Evaluate(_elapsedHold/5);
+            _serveBar.Service(_elapsedHold);
         }
-        if (Input.GetKeyUp(_serveButton) && _spriteRenderer.flipX == false || _elapsedHold >= 6)
+        if (Input.GetKeyUp(_serveButton)/* && _spriteRenderer.flipX == false */|| _elapsedHold >= 6)
         {
             _currentBall.transform.parent = null;
             _currentBall.bodyType = RigidbodyType2D.Dynamic;
-            _currentBall.AddForce(new Vector2(-2f * _elapsedHold, 2f * _elapsedHold), ForceMode2D.Impulse);
+
+            if (_player.TeamRight)
+                _currentBall.AddForce(new Vector2(-2f * _elapsedHold, 2f * _elapsedHold), ForceMode2D.Impulse);
+            else
+                _currentBall.AddForce(new Vector2(2f * _elapsedHold, 2f * _elapsedHold), ForceMode2D.Impulse);
+
             _elapsedHold = 0;
             _player.ChangeState(State.Idle);
         }
@@ -67,7 +78,7 @@ public class Serve : MonoBehaviour
     {
         if(_player.CurrentState != State.Serving)
         {
-            _slider.enabled = false;
+           // _slider.enabled = false;
         }
     }
 }
