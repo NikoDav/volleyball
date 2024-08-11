@@ -24,8 +24,6 @@ public class Serve : MonoBehaviour
     {
         if (_player.CurrentState != State.Serving)
             return;
-
-        
         
         if (Input.GetKey(_serveButton))
         {

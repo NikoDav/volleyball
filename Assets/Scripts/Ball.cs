@@ -21,8 +21,14 @@ public class Ball : MonoBehaviour
             _gameManager.SetSide(false);
         }
 
-        if(collision.TryGetComponent(out Floor floor))
+        
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.TryGetComponent(out Floor floor))
         {
+            Debug.Log("Hit floor");
             if (_gameManager.GetSide())
             {
                 _gameManager.AddPoints(false);

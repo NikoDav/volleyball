@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TouchPanel _touchPanel;
     [SerializeField] private GameObject _winPanel;
     [SerializeField] private TMP_Text _winText;
+    [SerializeField] private TMP_Text _leftPointsText;
+    [SerializeField] private TMP_Text _rightPointsText;
     private int _teamTouchRight;
     private int _teamTouchLeft;
     private bool _rightSide;
@@ -60,7 +62,7 @@ public class GameManager : MonoBehaviour
             item.SuperHit.Innit(_startRight);
         }
             
-        if(Random.Range(0, 1) == 0)
+        if(Random.Range(0, 2) == 0)
         {
             _rightTeam[0].Serve.SetUp();
             //_rightTeam[1].ChangeControl();
@@ -198,10 +200,12 @@ public class GameManager : MonoBehaviour
         if (right)
         {
             _rightPoints++;
+            _rightPointsText.text = $"{_rightPoints}";
         }
         else
         {
             _leftPoints++;
+            _leftPointsText.text = $"{_leftPoints}";
         }
     }
     public void Win()
